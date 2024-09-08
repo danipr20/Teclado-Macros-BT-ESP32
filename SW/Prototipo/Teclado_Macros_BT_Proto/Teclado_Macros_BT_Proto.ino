@@ -2,9 +2,9 @@
 
 BleKeyboard bleKeyboard("Teclado Macros ESP32");
 
-const int buttonPins[] = {4, 16, 17, 18, 22, 23, 25, 33, 32}; // Pines de los botones
+const int buttonPins[] = { 4, 16, 17, 18, 22, 23, 25, 33, 32 };  // Pines de los botones
 const int numButtons = sizeof(buttonPins) / sizeof(buttonPins[0]);
-const int ledPin = 2; // Pin del LED (D2)
+const int ledPin = 2;  // Pin del LED (D2)
 
 void setup() {
   Serial.begin(115200);
@@ -14,7 +14,7 @@ void setup() {
     pinMode(buttonPins[i], INPUT_PULLUP);
   }
 
-  pinMode(ledPin, OUTPUT); // Inicializar el pin del LED como salida
+  pinMode(ledPin, OUTPUT);  // Inicializar el pin del LED como salida
 
   Serial.println("Iniciando Bluetooth...");
   bleKeyboard.begin();
@@ -24,11 +24,11 @@ void loop() {
   if (bleKeyboard.isConnected()) {
     for (int i = 0; i < numButtons; ++i) {
       if (digitalRead(buttonPins[i]) == LOW) {
-        
+
         // Parpadeo rápido del LED
-        digitalWrite(ledPin, HIGH); // Encender LED
-        delay(50); // Esperar 50 ms
-        digitalWrite(ledPin, LOW); // Apagar LED
+        digitalWrite(ledPin, HIGH);  // Encender LED
+        delay(50);                   // Esperar 50 ms
+        digitalWrite(ledPin, LOW);   // Apagar LED
 
         switch (buttonPins[i]) {
           case 4:
@@ -101,7 +101,8 @@ void loop() {
         }
 
         delay(100);  // Antirrebote
-        while (digitalRead(buttonPins[i]) == LOW);  // Esperar hasta que se suelte el botón
+        while (digitalRead(buttonPins[i]) == LOW)
+          ;  // Esperar hasta que se suelte el botón
       }
     }
   }
