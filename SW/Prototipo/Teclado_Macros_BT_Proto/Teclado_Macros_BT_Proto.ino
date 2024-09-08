@@ -4,6 +4,7 @@ BleKeyboard bleKeyboard("Teclado Macros ESP32");
 
 const int buttonPins[] = {4, 16, 17, 18, 22, 23, 25, 33, 32}; // Pines de los botones
 const int numButtons = sizeof(buttonPins) / sizeof(buttonPins[0]);
+const int ledPin = 2; // Pin del LED (D2)
 
 void setup() {
   Serial.begin(115200);
@@ -13,6 +14,8 @@ void setup() {
     pinMode(buttonPins[i], INPUT_PULLUP);
   }
 
+  pinMode(ledPin, OUTPUT); // Inicializar el pin del LED como salida
+
   Serial.println("Iniciando Bluetooth...");
   bleKeyboard.begin();
 }
@@ -21,8 +24,28 @@ void loop() {
   if (bleKeyboard.isConnected()) {
     for (int i = 0; i < numButtons; ++i) {
       if (digitalRead(buttonPins[i]) == LOW) {
+        
+        // Parpadeo rápido del LED
+        digitalWrite(ledPin, HIGH); // Encender LED
+        delay(50); // Esperar 50 ms
+        digitalWrite(ledPin, LOW); // Apagar LED
+
         switch (buttonPins[i]) {
           case 4:
+            // Ctrl + F7
+            bleKeyboard.press(KEY_LEFT_CTRL);
+            bleKeyboard.press(KEY_F7);
+            bleKeyboard.releaseAll();
+            Serial.println("Enviando Ctrl + F7");
+            break;
+          case 16:
+            // Shift + F7
+            bleKeyboard.press(KEY_LEFT_ALT);
+            bleKeyboard.press(KEY_F7);
+            bleKeyboard.releaseAll();
+            Serial.println("Enviando Shift + F7");
+            break;
+          case 17:
             // Ctrl + Alt + Shift + F2
             bleKeyboard.press(KEY_LEFT_CTRL);
             bleKeyboard.press(KEY_LEFT_ALT);
@@ -31,7 +54,7 @@ void loop() {
             bleKeyboard.releaseAll();
             Serial.println("Enviando Ctrl + Alt + Shift + F2");
             break;
-          case 16:
+          case 18:
             // Ctrl + Alt + Shift + F3
             bleKeyboard.press(KEY_LEFT_CTRL);
             bleKeyboard.press(KEY_LEFT_ALT);
@@ -40,48 +63,25 @@ void loop() {
             bleKeyboard.releaseAll();
             Serial.println("Enviando Ctrl + Alt + Shift + F3");
             break;
-          case 17:
-            // Ctrl + Alt + Shift + F4
-            bleKeyboard.press(KEY_LEFT_CTRL);
-            bleKeyboard.press(KEY_LEFT_ALT);
-            bleKeyboard.press(KEY_LEFT_SHIFT);
-            bleKeyboard.press(KEY_F4);
-            bleKeyboard.releaseAll();
-            Serial.println("Enviando Ctrl + Alt + Shift + F4");
-            break;
-          case 18:
-            // Ctrl + Alt + Shift + F5
-            bleKeyboard.press(KEY_LEFT_CTRL);
-            bleKeyboard.press(KEY_LEFT_ALT);
-            bleKeyboard.press(KEY_LEFT_SHIFT);
-            bleKeyboard.press(KEY_F5);
-            bleKeyboard.releaseAll();
-            Serial.println("Enviando Ctrl + Alt + Shift + F5");
-            break;
           case 22:
-            // Ctrl + Shift + F6
+            // Ctrl + C
             bleKeyboard.press(KEY_LEFT_CTRL);
-            bleKeyboard.press(KEY_LEFT_SHIFT);
-            bleKeyboard.press(KEY_F6);
+            bleKeyboard.press('c');
             bleKeyboard.releaseAll();
-            Serial.println("Enviando Ctrl + Shift + F6");
+            Serial.println("Enviando Ctrl + C");
             break;
           case 23:
-            // Ctrl + Shift + F7
+            // Ctrl + V
             bleKeyboard.press(KEY_LEFT_CTRL);
-            bleKeyboard.press(KEY_LEFT_SHIFT);
-            bleKeyboard.press(KEY_F7);
+            bleKeyboard.press('v');
             bleKeyboard.releaseAll();
-            Serial.println("Enviando Ctrl + Shift + F7");
+            Serial.println("Enviando Ctrl + V");
             break;
           case 25:
             // PrintScreen o Win + Shift + S
-            //bleKeyboard.press(KEY_PRTSC);
-
             bleKeyboard.press(KEY_LEFT_GUI);
             bleKeyboard.press(KEY_LEFT_SHIFT);
-            bleKeyboard.press('S');
-
+            bleKeyboard.press('s');
             bleKeyboard.releaseAll();
             Serial.println("Enviando Win + Shift + S");
             break;
@@ -99,6 +99,7 @@ void loop() {
             Serial.println("Botón no mapeado");
             break;
         }
+
         delay(100);  // Antirrebote
         while (digitalRead(buttonPins[i]) == LOW);  // Esperar hasta que se suelte el botón
       }
