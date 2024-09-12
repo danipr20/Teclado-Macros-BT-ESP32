@@ -1,6 +1,6 @@
 #include <BleKeyboard.h>
 
-BleKeyboard bleKeyboard("Teclado Macros ESP32");
+BleKeyboard bleKeyboard("ESP32 KeyBoard");
 
 const int buttonPins[] = { 4, 16, 17, 18, 22, 23, 25, 33, 32 };  // Pines de los botones
 const int numButtons = sizeof(buttonPins) / sizeof(buttonPins[0]);
