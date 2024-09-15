@@ -1,0 +1,120 @@
+
+captive_portal:
+# Configuración de los pines para el teclado
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO23
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P1"
+
+  - platform: gpio
+    pin:
+      number: GPIO22
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P2"
+
+  - platform: gpio
+    pin:
+      number: GPIO18
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P3"
+
+  - platform: gpio
+    pin:
+      number: GPIO16
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P4"
+
+  - platform: gpio
+    pin:
+      number: GPIO4
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P5"
+
+  - platform: gpio
+    pin:
+      number: GPIO25
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P6"
+
+  - platform: gpio
+    pin:
+      number: GPIO21
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P7"
+
+  - platform: gpio
+    pin:
+      number: GPIO19
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P8"
+
+  - platform: gpio
+    pin:
+      number: GPIO17
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P9"
+
+  - platform: gpio
+    pin:
+      number: GPIO33
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P10"
+
+  - platform: gpio
+    pin:
+      number: GPIO32
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P11"
+
+  - platform: gpio
+    pin:
+      number: GPIO26
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P12"
+
+  - platform: gpio
+    pin:
+      number: GPIO27
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P13"
+
+  - platform: gpio
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P14"
+
+  - platform: gpio
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Tecla P15"
+
+# Configuración del LED Built-in
+light:
+  - platform: binary
+    name: "LED BuiltIn"
+    output: ledbuildin_output
+
+output:
+  - id: ledbuildin_output
+    platform: gpio
+    pin: GPIO2
+    inverted: False
