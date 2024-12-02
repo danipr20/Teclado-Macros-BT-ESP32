@@ -149,14 +149,14 @@ void loop() {
             bleKeyboard.releaseAll();
             Serial.println("Enviando Ctrl + Alt + Shift + F7");
             break;
-          case 26:
+          case 32:
             // Botón P11: Ctrl + C
             bleKeyboard.press(KEY_LEFT_CTRL);
             bleKeyboard.press('z');
             bleKeyboard.releaseAll();
             Serial.println("Enviando Ctrl + Z");
             break;
-          case 32:
+          case 26:
             // Botón P12: Ctrl + F7
             bleKeyboard.press(KEY_LEFT_CTRL);
             bleKeyboard.press(KEY_F7);
@@ -172,18 +172,18 @@ void loop() {
             break;
           case 14:
             // Botón P14: Shift + WIN + S
-            bleKeyboard.press(KEY_HOME);
+            bleKeyboard.press(KEY_RIGHT_GUI);
             bleKeyboard.press(KEY_LEFT_SHIFT);
             bleKeyboard.press('s');
             bleKeyboard.releaseAll();
             Serial.println("Enviando Shift + WIN + S");
             break;
           case 13:
-            // Botón P15: WIN + L
-            bleKeyboard.press(KEY_HOME);
-            bleKeyboard.press('l');
+            // Botón P15: WIN + K
+            bleKeyboard.press(KEY_RIGHT_GUI);
+            bleKeyboard.press('k');
             bleKeyboard.releaseAll();
-            Serial.println("Enviando WIN + L");
+            Serial.println("Enviando WIN + K");
             break;
           default:
             // Si el botón no está mapeado
