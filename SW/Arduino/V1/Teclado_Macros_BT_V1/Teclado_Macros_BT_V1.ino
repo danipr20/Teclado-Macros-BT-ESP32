@@ -165,10 +165,8 @@ void loop() {
             break;
           case 27:
             // Botón P13: Reserva
-/*            bleKeyboard.press(KEY_LEFT_CTRL);
-            bleKeyboard.press('z');
-            bleKeyboard.releaseAll();
-            Serial.println("Enviando Ctrl + Z");  */
+            bleKeyboard.println("KeyWord");
+            Serial.println("Enviando KeyWord");  
             break;
           case 14:
             // Botón P14: Shift + WIN + S
